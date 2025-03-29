@@ -2,18 +2,10 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  output: 'export',
   images: {
-    remotePatterns: [
-      {
-        protocol: 'http',
-        hostname: 'localhost',
-        port: '',
-        pathname: '/**',
-      },
-    ],
     unoptimized: true,
   },
-  output: 'export',
   basePath: '/portfolio',
   assetPrefix: '/portfolio/',
   trailingSlash: true,
