@@ -10,6 +10,11 @@ A modern, responsive portfolio website built with Next.js, TypeScript, and Tailw
 - 📱 Mobile-friendly layout
 - 🚀 Fast performance with Next.js
 - 🎯 SEO optimized
+- 🔄 Continuous deployment with GitHub Actions
+
+## Live Demo
+
+Visit the live portfolio at: [https://usamacodx.github.io/portfolio/](https://usamacodx.github.io/portfolio/)
 
 ## Tech Stack
 
