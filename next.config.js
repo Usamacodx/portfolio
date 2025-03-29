@@ -11,7 +11,11 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
+    unoptimized: true,
   },
+  output: 'export',
+  basePath: '/portfolio',
+  assetPrefix: '/portfolio/',
 }
 
 module.exports = nextConfig 
