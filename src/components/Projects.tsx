@@ -19,10 +19,10 @@ const projects: Project[] = [
     id: 1,
     title: "Voice Controlled IDE",
     description: "An innovative IDE that can be controlled by voice commands, making coding more accessible and efficient.",
-    mediaUrl: "/projects/voice-ide.jpg",
-    mediaType: "image",
+    mediaUrl: "/projects/voice-ide.mp4",
+    mediaType: "video",
     technologies: ["Next.js", "TypeScript", "Web Speech API", "Monaco Editor"],
-    link: "https://github.com/yourusername/voice-ide",
+    link: "https://voice-ide.vercel.app/",
   },
   {
     id: 2,
@@ -31,7 +31,7 @@ const projects: Project[] = [
     mediaUrl: "/projects/ecommerce.mp4",
     mediaType: "video",
     technologies: ["Wordpress", "WooCommerce", "Elementor", "CSS","PHP"],
-    link: "https://github.com/yourusername/ecommerce",
+    link: "https://cardigannco.com/",
   }
 ];
 

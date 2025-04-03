@@ -17,7 +17,7 @@ const topLinks = [
       </svg>
     ),
     link: "https://www.linkedin.com/in/usamagog7/",
-    description: "Let&apos;s connect on LinkedIn",
+    description: "Let's connect on LinkedIn",
   },
   {
     name: "Download CV",

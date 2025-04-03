@@ -3,6 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import gsap from "gsap";
+import { FaReact, FaNodeJs, FaWordpress, FaShieldAlt } from "react-icons/fa";
 
 const letterContainer = {
   initial: { opacity: 1 },
@@ -89,8 +90,57 @@ const floatingAnimation = {
   },
 };
 
+const particleContainer = {
+  initial: { opacity: 0 },
+  animate: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const particle = {
+  initial: { opacity: 0, scale: 0 },
+  animate: {
+    opacity: [0, 1, 0],
+    scale: [0, 1, 0],
+    transition: {
+      duration: 4,
+      repeat: Infinity,
+      ease: "easeInOut",
+    },
+  },
+};
+
+const techIconContainer = {
+  initial: { opacity: 0 },
+  animate: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+      delayChildren: 1,
+    },
+  },
+};
+
+const techIcon = {
+  initial: { opacity: 0, scale: 0, rotate: -180 },
+  animate: {
+    opacity: 1,
+    scale: 1,
+    rotate: 0,
+    transition: {
+      type: "spring",
+      damping: 12,
+      stiffness: 100,
+    },
+  },
+};
+
 export default function Hero() {
   const backgroundRef = useRef<HTMLDivElement>(null);
+  const particlesRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (backgroundRef.current) {
@@ -99,6 +149,29 @@ export default function Hero() {
         duration: 20,
         repeat: -1,
         ease: "none",
+      });
+    }
+
+    // Create particles
+    if (particlesRef.current) {
+      const particles = Array.from({ length: 50 }, (_, i) => {
+        const particle = document.createElement("div");
+        particle.className = "absolute w-1 h-1 bg-blue-400/20 dark:bg-blue-200/20 rounded-full";
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.top = `${Math.random() * 100}%`;
+        particlesRef.current?.appendChild(particle);
+        return particle;
+      });
+
+      particles.forEach((particle) => {
+        gsap.to(particle, {
+          x: Math.random() * 200 - 100,
+          y: Math.random() * 200 - 100,
+          duration: Math.random() * 5 + 5,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+        });
       });
     }
   }, []);
@@ -110,10 +183,32 @@ export default function Hero() {
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden perspective-1000">
       <div
         ref={backgroundRef}
-        className="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-indigo-950 bg-[length:400%_400%]"
+        className="absolute inset-0 bg-gradient-to-br from-blue-50 via-indigo-100 to-purple-100 dark:from-gray-900 dark:via-indigo-950 dark:to-purple-950 bg-[length:400%_400%]"
       />
       
+      <div ref={particlesRef} className="absolute inset-0" />
+      
       <div className="relative z-10 text-center px-4">
+        <motion.div
+          variants={techIconContainer}
+          initial="initial"
+          animate="animate"
+          className="absolute top-0 left-0 w-full h-full pointer-events-none"
+        >
+          <motion.div variants={techIcon} className="absolute top-1/4 left-1/4">
+            <FaReact className="text-4xl text-blue-400/30 dark:text-blue-500/30" />
+          </motion.div>
+          <motion.div variants={techIcon} className="absolute top-1/3 right-1/4">
+            <FaNodeJs className="text-4xl text-green-400/30 dark:text-green-500/30" />
+          </motion.div>
+          <motion.div variants={techIcon} className="absolute bottom-1/4 left-1/3">
+            <FaWordpress className="text-4xl text-blue-400/30 dark:text-blue-500/30" />
+          </motion.div>
+          <motion.div variants={techIcon} className="absolute bottom-1/3 right-1/3">
+            <FaShieldAlt className="text-4xl text-red-400/30 dark:text-red-500/30" />
+          </motion.div>
+        </motion.div>
+
         <div className="text-4xl md:text-6xl font-bold mb-6 overflow-visible">
           <motion.div
             variants={letterContainer}
@@ -129,7 +224,7 @@ export default function Hero() {
                   ...crazyLetterAnim.animate,
                   ...floatingAnimation.animate,
                 }}
-                className="bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 text-transparent bg-clip-text inline-block transform-style-3d"
+                className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 dark:from-blue-400 dark:via-indigo-400 dark:to-purple-400 text-transparent bg-clip-text inline-block transform-style-3d"
               >
                 {letter === " " ? "\u00A0" : letter}
               </motion.span>
@@ -145,7 +240,7 @@ export default function Hero() {
               <motion.span
                 key={index}
                 variants={nameLetterAnim}
-                className="bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 text-transparent bg-clip-text inline-block transform-style-3d"
+                className="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 dark:from-blue-400 dark:via-indigo-400 dark:to-purple-400 text-transparent bg-clip-text inline-block transform-style-3d"
               >
                 {letter === " " ? "\u00A0" : letter}
               </motion.span>
@@ -165,7 +260,7 @@ export default function Hero() {
             animate="animate"
             transition={{ delay: 1.8 }}
             whileHover={{ scale: 1.1, rotate: 5 }}
-            className="inline-block"
+            className="inline-block bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 text-transparent bg-clip-text"
           >
             Full Stack Developer
           </motion.span>
@@ -183,7 +278,7 @@ export default function Hero() {
             animate="animate"
             transition={{ delay: 2.2 }}
             whileHover={{ scale: 1.1, rotate: -5 }}
-            className="inline-block"
+            className="inline-block bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 text-transparent bg-clip-text"
           >
             Wordpress Specialist
           </motion.span>
@@ -201,7 +296,7 @@ export default function Hero() {
             animate="animate"
             transition={{ delay: 2.6 }}
             whileHover={{ scale: 1.1, rotate: 5 }}
-            className="inline-block"
+            className="inline-block bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 text-transparent bg-clip-text"
           >
             Penetration Tester
           </motion.span>
@@ -221,7 +316,7 @@ export default function Hero() {
             }}
             whileTap={{ scale: 0.9 }}
             href="#projects"
-            className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all transform-gpu"
+            className="px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all transform-gpu"
           >
             View Projects
           </motion.a>
@@ -248,19 +343,9 @@ export default function Hero() {
       >
         <motion.div 
           animate={floatingAnimation.animate}
-          className="w-6 h-10 border-2 border-gray-400 dark:border-gray-600 rounded-full p-1"
+          className="text-4xl text-blue-600 dark:text-blue-400"
         >
-          <motion.div
-            animate={{
-              y: [0, 12, 0],
-            }}
-            transition={{
-              duration: 1.5,
-              repeat: Infinity,
-              repeatType: "loop",
-            }}
-            className="w-1.5 h-1.5 bg-gray-400 dark:bg-gray-600 rounded-full"
-          />
+          ↓
         </motion.div>
       </motion.div>
     </section>
